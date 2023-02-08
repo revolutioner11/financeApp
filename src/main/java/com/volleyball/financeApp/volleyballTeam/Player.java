@@ -1,7 +1,8 @@
-package com.volleyball.financeApp.player;
+package com.volleyball.financeApp.volleyballTeam;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.volleyball.financeApp.volleyballTeam.BankAccount;
+import com.volleyball.financeApp.volleyballTeam.VolleyballTeam;
 
 import javax.persistence.*;
 import java.time.Period;
@@ -12,6 +13,8 @@ import java.util.UUID;
 public class Player {
     @Id
     private UUID playerID;
+    @ManyToOne
+    private VolleyballTeam volleyballTeam;
     private int teamNumber = 0;
     private String name = "Other";
     @OneToOne
@@ -28,7 +31,7 @@ public class Player {
         playerID = UUID.randomUUID();
         this.name = name;
         this.teamNumber = number;
-        bankAccount = new BankAccount(playerID);
+        bankAccount = new BankAccount(this);
     }
 
     public void setName(String name) {
@@ -52,4 +55,11 @@ public class Player {
         return name + ", " + teamNumber;
     }
 
+    public UUID getPlayerID() {
+        return playerID;
+    }
+
+    public VolleyballTeam getVolleyballTeam() {
+        return volleyballTeam;
+    }
 }

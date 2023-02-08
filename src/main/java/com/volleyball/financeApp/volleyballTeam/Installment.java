@@ -17,10 +17,8 @@ public class Installment {
             generator = "installment_sequence"
     )
     private long installmentNumber;
-
-    @ManyToOne  // check if correct?
+    @ManyToOne
     private BankAccount bankAccount;
-
     private  float amount;
     private String reason;
     private String adminNote;
@@ -30,10 +28,17 @@ public class Installment {
     public Installment() {
         date = LocalDate.now();
     }
-
     Installment(BankAccount bankAccount, float amount) {
         this.bankAccount = bankAccount;
         this.amount = amount;
         date = LocalDate.now();
+    }
+
+    public BankAccount getBankAccount() {
+        return bankAccount;
+    }
+
+    public float getAmount() {
+        return amount;
     }
 }

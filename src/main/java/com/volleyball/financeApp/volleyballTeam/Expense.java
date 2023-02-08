@@ -3,6 +3,7 @@ package com.volleyball.financeApp.volleyballTeam;
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table
@@ -25,14 +26,20 @@ public class Expense {
     private  String adminNote;
     @OneToMany
     private List<Payment> payments;
-    // account expenses list??
+    @OneToMany
+    private List<AccountExpense> accountExpenses;
     public Expense() {
-        payments = new LinkedList<Payment>();
+       // payments = new LinkedList<Payment>();
+        //accountExpenses = new LinkedList<AccountExpense>();
     }
 
     Expense(String title, float overallPrice) {
         this.title = title;
         this.overallPrice = overallPrice;
         payments = new LinkedList<Payment>();
+    }
+
+    long getExpenseNumber() {
+        return expenseNumber;
     }
 }

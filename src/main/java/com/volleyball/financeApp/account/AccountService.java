@@ -1,5 +1,6 @@
-package com.volleyball.financeApp.player;
+package com.volleyball.financeApp.account;
 
+import com.volleyball.financeApp.volleyballTeam.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,39 +8,40 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
-public class PlayerService {
-    private final PlayerRepository playerRepository;
+public class AccountService {
+    private final AccountRepository accountRepository;
 
     @Autowired
-    public PlayerService(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
     }
 
     public List<Player> getPlayers() {
-        return playerRepository.findAll();
+        return accountRepository.findAll();
     }
 
     public void addNewPlayer(Player player) {
-        Optional<Player> playerOptional = playerRepository.findPlayerByNumber(player.getTeamNumber());
+        Optional<Player> playerOptional = accountRepository.findPlayerByNumber(player.getTeamNumber());
         if (playerOptional.isPresent()) {
             throw new IllegalStateException("number taken");
         }
-        playerRepository.save(player);
+        accountRepository.save(player);
     }
 
-    public void deletePlayer(Long playerId) {
-        boolean exists =  playerRepository.existsById(playerId);
+    public void deletePlayer(UUID playerId) {
+        boolean exists =  accountRepository.existsById(playerId);
         if (!exists) {
             throw new IllegalStateException("Player with id: " + playerId + " does not exist!");
         }
-        playerRepository.deleteById(playerId);
+        accountRepository.deleteById(playerId);
     }
 
     @Transactional
-    public void updatePlayer(long playerId, String name, int teamNumber) {
-        Player player = playerRepository.findById(playerId).orElseThrow(
+    public void updatePlayer(UUID playerId, String name, int teamNumber) {
+        Player player = accountRepository.findPlayerByID(playerId).orElseThrow(
                 () -> new IllegalStateException("Player with id: " + playerId + " does not exist!"));
 
         if (name != null &&
@@ -49,7 +51,7 @@ public class PlayerService {
         }
 
         if (player.getTeamNumber() != teamNumber) {
-            Optional<Player> playerOptional = playerRepository.findPlayerByNumber(teamNumber);
+            Optional<Player> playerOptional = accountRepository.findPlayerByNumber(teamNumber);
             if (playerOptional.isPresent()) {
                 throw new IllegalStateException("number taken");
             }

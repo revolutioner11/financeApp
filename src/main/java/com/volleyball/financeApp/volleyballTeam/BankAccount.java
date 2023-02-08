@@ -1,11 +1,6 @@
 package com.volleyball.financeApp.volleyballTeam;
 
-import jdk.jfr.Enabled;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -15,11 +10,10 @@ import java.util.UUID;
 public class BankAccount {
     @Id
     private UUID bankAccountID;
-
+    @OneToOne
+    private Player player;
     private float paid;
     private float overallToPay;
-    private float leftToPay;
-
     @OneToMany
     private List<AccountExpense> accountExpenses;
     @OneToMany
@@ -30,10 +24,40 @@ public class BankAccount {
         accountExpenses = new LinkedList<AccountExpense>();
         installments = new LinkedList<Installment>();
     }
-
-    public BankAccount(UUID playerID) {
-        this.bankAccountID = playerID;
+    public BankAccount(Player player) {
+        this.player = player;
+        this.bankAccountID = player.getPlayerID();
         accountExpenses = new LinkedList<AccountExpense>();
         installments = new LinkedList<Installment>();
+    }
+    boolean addExpense(AccountExpense newAccountExpense) {
+        accountExpenses.add(newAccountExpense);
+        return true;
+    }
+    boolean requestInstallment(Installment newInstallment) {
+        getTeamBank().requestInstallment(newInstallment);
+        return true;
+    }
+    void addInstallment(Installment newInstallment) {
+        installments.add(newInstallment);
+        paid += newInstallment.getAmount();
+    }
+    TeamBank getTeamBank() {
+        return player.getVolleyballTeam().getTeamBank();
+    }
+    boolean isIdEqual(UUID id) {
+        return this.bankAccountID.equals(id);
+    }
+    public float getPaid() {
+        return paid;
+    }
+    public float getOverallToPay() {
+        return overallToPay;
+    }
+    public float getleftToPay() {
+        return overallToPay - paid;
+    }
+    UUID getBankAccountID() {
+        return bankAccountID;
     }
 }

@@ -1,7 +1,5 @@
 package com.volleyball.financeApp.volleyballTeam;
 
-import com.volleyball.financeApp.player.Player;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ import java.time.LocalDate;
 @Table
 public class VolleyballTeam {
     @Id
-    private UUID teamID;
+    private UUID volleyballTeamID;
     private String teamName;
     private LocalDate dateCreated;
     @OneToMany
@@ -20,16 +18,18 @@ public class VolleyballTeam {
     @OneToOne
     private TeamBank teamBank;
 
+
+
     VolleyballTeam() {
-        teamID = UUID.randomUUID();
+        volleyballTeamID = UUID.randomUUID();
         teamName = "Team has no name yet!";
         dateCreated = LocalDate.now();
         playerList = new ArrayList<Player>();
-        teamBank = new TeamBank(teamID);
+        teamBank = new TeamBank(this);
     }
 
     VolleyballTeam(String teamName, LocalDate dateCreated) {
-        teamID = UUID.randomUUID();
+        volleyballTeamID = UUID.randomUUID();
         this.teamName = teamName;
         this.dateCreated = dateCreated;
         playerList = new ArrayList<Player>();
@@ -43,5 +43,12 @@ public class VolleyballTeam {
             playerList.add(newPlayer);
             return true;
         }
+    }
+    public TeamBank getTeamBank() {
+        return teamBank;
+    }
+
+    UUID getVolleyballTeamID() {
+        return volleyballTeamID;
     }
 }
