@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -23,6 +23,7 @@ public class Installment {
     private String reason;
     private String adminNote;
     private String additionalPayers;
+   // @Temporal(TemporalType.DATE)
     private LocalDate date;
 
     public Installment() {

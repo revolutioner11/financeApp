@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,7 +18,9 @@ public class Payment {
             generator = "payment_sequence"
     )
     private long paymentNumber;
+   // @Temporal(TemporalType.DATE)
     private LocalDate date;
+
     @ManyToOne
     private Expense expense;
     private float amount;

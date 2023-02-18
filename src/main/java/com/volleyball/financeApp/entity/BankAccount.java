@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -43,7 +43,7 @@ public class BankAccount {
         paid += newInstallment.getAmount();
     }
     TeamBank getTeamBank() {
-        return player.getVolleyballTeam().getTeamBank();
+        return player.getTeam().getTeamBank();
     }
     boolean isIdEqual(UUID id) {
         return this.bankAccountID.equals(id);

@@ -1,10 +1,10 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 
 // @ not entity but what?
 @Entity
-@Table
+//@Table
 public class AccountExpense {
     @EmbeddedId
     private CompositeKey compositeKey;

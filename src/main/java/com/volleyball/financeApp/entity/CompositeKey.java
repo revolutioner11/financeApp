@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

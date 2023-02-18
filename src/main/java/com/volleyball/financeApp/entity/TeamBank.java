@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +14,7 @@ class TeamBank {
     private final UUID teamBankID;
 
     @OneToOne
-    private VolleyballTeam volleyballTeam;
+    private Team team;
     private UUID adminID;
     private float overallToCollect;
     private float collected;
@@ -34,12 +34,12 @@ class TeamBank {
         installmentRequests = new LinkedList<Installment>();
         teamBankID = UUID.randomUUID();
     }
-    TeamBank(VolleyballTeam volleyballTeam) {
-        teamBankID = volleyballTeam.getVolleyballTeamID();
+    TeamBank(Team team) {
+        teamBankID = team.getTeamId();
         expenses = new LinkedList<Expense>();
         installments = new LinkedList<Installment>();
         installmentRequests = new LinkedList<Installment>();
-        this.volleyballTeam = volleyballTeam;
+        this.team = team;
     }
     public float getOverallToCollect() {
         return overallToCollect;

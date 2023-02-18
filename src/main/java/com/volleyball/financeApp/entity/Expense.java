@@ -1,9 +1,8 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table

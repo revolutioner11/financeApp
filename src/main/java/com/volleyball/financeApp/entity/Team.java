@@ -1,4 +1,4 @@
-package com.volleyball.financeApp.volleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,28 +8,27 @@ import java.time.LocalDate;
 
 @Entity
 @Table
-public class VolleyballTeam {
+public class Team {
     @Id
-    private UUID volleyballTeamID;
+    private UUID teamId;
     private String teamName;
+  //  @Temporal(TemporalType.DATE)
     private LocalDate dateCreated;
     @OneToMany
     private List<Player> playerList;
     @OneToOne
     private TeamBank teamBank;
 
-
-
-    VolleyballTeam() {
-        volleyballTeamID = UUID.randomUUID();
+    Team() {
+        teamId = UUID.randomUUID();
         teamName = "Team has no name yet!";
         dateCreated = LocalDate.now();
         playerList = new ArrayList<Player>();
         teamBank = new TeamBank(this);
     }
 
-    VolleyballTeam(String teamName, LocalDate dateCreated) {
-        volleyballTeamID = UUID.randomUUID();
+    Team(String teamName, LocalDate dateCreated) {
+        teamId = UUID.randomUUID();
         this.teamName = teamName;
         this.dateCreated = dateCreated;
         playerList = new ArrayList<Player>();
@@ -48,7 +47,23 @@ public class VolleyballTeam {
         return teamBank;
     }
 
-    UUID getVolleyballTeamID() {
-        return volleyballTeamID;
+    public UUID getTeamId() {
+        return teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 }

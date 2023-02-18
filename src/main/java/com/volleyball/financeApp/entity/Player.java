@@ -1,11 +1,6 @@
-package com.volleyball.financeApp.volleyballTeam;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.volleyball.financeApp.volleyballTeam.BankAccount;
-import com.volleyball.financeApp.volleyballTeam.VolleyballTeam;
+package com.volleyball.financeApp.entity;
 
 import javax.persistence.*;
-import java.time.Period;
 import java.util.UUID;
 
 @Entity
@@ -14,7 +9,7 @@ public class Player {
     @Id
     private UUID playerID;
     @ManyToOne
-    private VolleyballTeam volleyballTeam;
+    private Team team;
     private int teamNumber = 0;
     private String name = "Other";
     @OneToOne
@@ -59,7 +54,7 @@ public class Player {
         return playerID;
     }
 
-    public VolleyballTeam getVolleyballTeam() {
-        return volleyballTeam;
+    public Team getTeam() {
+        return team;
     }
 }
