@@ -1,12 +1,8 @@
-package com.volleyball.financeApp.configuration;
+package com.volleyball.financeApp.player;
 
-import com.volleyball.financeApp.entity.Player;
-import com.volleyball.financeApp.repository.PlayerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 @Configuration
 public class PlayerConfig {

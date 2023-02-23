@@ -1,4 +1,7 @@
-package com.volleyball.financeApp.entity;
+package com.volleyball.financeApp.team;
+
+import com.volleyball.financeApp.player.Player;
+import com.volleyball.financeApp.entity.TeamBank;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,6 +15,7 @@ public class Team {
     @Id
     private UUID teamId;
     private String teamName;
+    //private String email;
   //  @Temporal(TemporalType.DATE)
     private LocalDate dateCreated;
     @OneToMany
@@ -32,6 +36,7 @@ public class Team {
         this.teamName = teamName;
         this.dateCreated = dateCreated;
         playerList = new ArrayList<Player>();
+        //this.email = email;
     }
 
     boolean addPlayer(Player newPlayer) {
@@ -65,5 +70,13 @@ public class Team {
 
     public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
+    }
+
+    public List<Player> getAllPlayers() {
+        return playerList;
+    }
+
+    public void deletePlayer(Player player) {
+        playerList.remove(player);
     }
 }

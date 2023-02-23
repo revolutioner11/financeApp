@@ -1,4 +1,7 @@
-package com.volleyball.financeApp.entity;
+package com.volleyball.financeApp.player;
+
+import com.volleyball.financeApp.entity.BankAccount;
+import com.volleyball.financeApp.team.Team;
 
 import javax.persistence.*;
 import java.util.UUID;

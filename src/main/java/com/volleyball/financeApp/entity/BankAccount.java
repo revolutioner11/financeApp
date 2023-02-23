@@ -1,5 +1,7 @@
 package com.volleyball.financeApp.entity;
 
+import com.volleyball.financeApp.player.Player;
+
 import javax.persistence.*;
 import java.util.LinkedList;
 import java.util.List;

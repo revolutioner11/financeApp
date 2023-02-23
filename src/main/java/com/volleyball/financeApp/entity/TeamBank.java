@@ -1,5 +1,6 @@
 package com.volleyball.financeApp.entity;
 
+import com.volleyball.financeApp.team.Team;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 @Entity
 @Table
-class TeamBank {
+public class TeamBank {
     @Id
     private final UUID teamBankID;
 
@@ -34,7 +35,7 @@ class TeamBank {
         installmentRequests = new LinkedList<Installment>();
         teamBankID = UUID.randomUUID();
     }
-    TeamBank(Team team) {
+    public TeamBank(@NotNull Team team) {
         teamBankID = team.getTeamId();
         expenses = new LinkedList<Expense>();
         installments = new LinkedList<Installment>();

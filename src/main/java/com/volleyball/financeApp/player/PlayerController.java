@@ -1,7 +1,5 @@
-package com.volleyball.financeApp.controller;
+package com.volleyball.financeApp.player;
 
-import com.volleyball.financeApp.service.PlayerService;
-import com.volleyball.financeApp.entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

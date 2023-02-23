@@ -1,7 +1,5 @@
-package com.volleyball.financeApp.service;
+package com.volleyball.financeApp.player;
 
-import com.volleyball.financeApp.entity.Player;
-import com.volleyball.financeApp.repository.PlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +22,20 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
+    public Player getPlayerById(UUID playerId){
+        return playerRepository.findPlayerById(playerId).orElseThrow(
+                () -> new IllegalStateException("Player with id: " + playerId + " does not exist!"));
+    }
+
     public void addNewPlayer(Player player) {
-        Optional<Player> playerOptional = playerRepository.findPlayerByNumber(player.getTeamNumber());
+        Optional<Player> playerOptional = playerRepository.findPlayerById(player.getPlayerID());
         if (playerOptional.isPresent()) {
             throw new IllegalStateException("number taken");
+            ///
+            ///
+            ///         MORE LOGIC !
+            ///
+            ///
         }
         playerRepository.save(player);
     }
