@@ -13,7 +13,7 @@ public class Player {
     private UUID playerID;
     @ManyToOne
     private Team team;
-    private int teamNumber = 0;
+    private int number = 0;
     private String name = "Other";
     @OneToOne
     BankAccount bankAccount;
@@ -23,12 +23,12 @@ public class Player {
 
     public Player() {
         name = "Other";
-        teamNumber = 0;
+        number = 0;
     }
     public Player(String name, int number) {
         playerID = UUID.randomUUID();
         this.name = name;
-        this.teamNumber = number;
+        this.number = number;
         bankAccount = new BankAccount(this);
     }
 
@@ -36,21 +36,21 @@ public class Player {
         this.name = name;
     }
 
-    public void setTeamNumber(int teamNumber) {
-        this.teamNumber = teamNumber;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getTeamNumber() {
-        return teamNumber;
+    public int getNumber() {
+        return number;
     }
 
     @Override
     public String toString() {
-        return name + ", " + teamNumber;
+        return name + ", " + number;
     }
 
     public UUID getPlayerID() {

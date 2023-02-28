@@ -3,7 +3,6 @@ package com.volleyball.financeApp.player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -16,21 +15,25 @@ public class PlayerController {
         this.playerService = accountService;
     }
 
-    @GetMapping
-    public List<Player> getPlayers() {
-        return playerService.getPlayers();
+    ///         GET         ///
+    @GetMapping(path = "{playerId}")
+    public Player getPlayerById(@PathVariable("playerId") UUID playerId) {
+        return playerService.getPlayerById(playerId);
     }
-
+    ///         /GET        ///
+    ///         POST        ///
     @PostMapping
-    public void registerNewPlayer(@RequestBody Player player) {
+    public void addNewPlayer(@RequestBody Player player) {
         playerService.addNewPlayer(player);
     }
-
+    ///         /POST       ///
+    ///        DELETE       ///
     @DeleteMapping(path = "{playerId}")
     public void deletePlayer(@PathVariable("playerId") UUID playerId) {
         playerService.deletePlayer(playerId);
     }
-
+    ///       /DELETE       ///
+    ///         PUT         ///
     @PutMapping(path = "{playerId}")
     public void updatePlayer(
             @PathVariable("playerId") UUID playerId,
@@ -38,4 +41,5 @@ public class PlayerController {
             @RequestParam(required = false) int teamNumber) {
         playerService.updatePlayer(playerId, name, teamNumber);
     }
+    ///        /PUT         ///
 }

@@ -10,8 +10,8 @@ import java.util.UUID;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, UUID> {
 
-//    @Query("SELECT s FROM Player s WHERE s.teamNumber = ?1")
-//    Optional<Player> findPlayerByNumber(int teamNumber);
+    @Query("SELECT s FROM Player s WHERE s.teamNumber = ?1 and s.teamId = ?2") /// ???
+    Optional<Player> findPlayerByNumber(int teamNumber, UUID teamId);
 
     @Query("SELECT s FROM Player s WHERE s.playerID = ?1")
     Optional<Player> findPlayerById(UUID playerID);
