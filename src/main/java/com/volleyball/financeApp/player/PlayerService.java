@@ -18,27 +18,27 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
 
-    public List<Player> getPlayers() {
-        return playerRepository.findAll();
-    }
+    ///         GET         ///
 
     public Player getPlayerById(UUID playerId){
         return playerRepository.findPlayerById(playerId).orElseThrow(
-                () -> new IllegalStateException("Player with id: " + playerId + " does not exist!"));
+            () -> new IllegalStateException("Player with id: " + playerId + " does not exist!"));
     }
 
+    ///         /GET        ///
+    ///         POST        ///
+
     public void addNewPlayer(Player player) {
-        Optional<Player> playerOptional = playerRepository.findPlayerById(player.getPlayerID());
+        Optional<Player> playerOptional = playerRepository.findPlayerByNumber(player.getNumber(), player.getTeam().getTeamId());
         if (playerOptional.isPresent()) {
-            throw new IllegalStateException("number taken");
-            ///
-            ///
-            ///         MORE LOGIC !
-            ///
-            ///
+            throw new IllegalStateException("Player with number " + player.getNumber()
+                    + "in team \"" + player.getTeam().getTeamName()+"\" already exists");
         }
         playerRepository.save(player);
     }
+
+    ///         /POST       ///
+    ///        DELETE       ///
 
     public void deletePlayer(UUID playerId) {
         boolean exists =  playerRepository.existsById(playerId);
@@ -47,6 +47,9 @@ public class PlayerService {
         }
         playerRepository.deleteById(playerId);
     }
+
+    ///       /DELETE       ///
+    ///         PUT         ///
 
     @Transactional
     public void updatePlayer(UUID playerId, String name, int teamNumber) {
@@ -59,12 +62,14 @@ public class PlayerService {
             player.setName(name);
         }
 
-        if (player.getTeamNumber() != teamNumber) {
-            Optional<Player> playerOptional = playerRepository.findPlayerByNumber(teamNumber);
+        if (player.getNumber() != teamNumber) {
+            Optional<Player> playerOptional = playerRepository.findPlayerByNumber(teamNumber, player.getTeam().getTeamId());
             if (playerOptional.isPresent()) {
-                throw new IllegalStateException("number taken");
+                throw new IllegalStateException("Number taken!");
             }
-            player.setTeamNumber(teamNumber);
+            player.setNumber(teamNumber);
         }
     }
+
+    ///        /PUT         ///
 }

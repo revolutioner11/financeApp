@@ -2,16 +2,16 @@ package com.volleyball.financeApp.service;
 
 public class TeamBankService {
 
-    ///         GET        ///
+    ///         GET         ///
 
     ///         /GET        ///
     ///         POST        ///
 
-    ///         /POST        ///
-    ///         DELETE        ///
+    ///         /POST       ///
+    ///        DELETE       ///
 
-    ///         /DELETE        ///
-    ///         PUT        ///
+    ///       /DELETE       ///
+    ///         PUT         ///
 
-    ///         /PUT        ///
+    ///        /PUT         ///
 }

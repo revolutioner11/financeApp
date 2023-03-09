@@ -31,10 +31,6 @@ public class TeamService {
         return team.getAllPlayers();
     }
 
-    //    public List<Team> getTeams() {
-    //        return teamRepository.findAll();
-    //    }
-
     ///         /GET        ///
     ///         POST        ///
     public void addNewPlayer(UUID teamId, Player player) {
